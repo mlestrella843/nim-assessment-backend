@@ -63,8 +63,8 @@ const updateMenuItem = async (id, body) => {
 
 const deleteMenuItem = async (id) => {
   try {   
-    const ItemToDelete = await MenuItems.findByIdAndDelete(id);
-    return ItemToDelete;
+    const ItemDeleted = await MenuItems.findByIdAndDelete(id);
+    return ItemDeleted;
   } catch (error) {
     return error;
   }
