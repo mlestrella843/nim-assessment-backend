@@ -18,6 +18,10 @@ const menuItemsSchema = new mongoose.Schema({
   imageUrl: {
     type: String
   },
+  updateAt: {
+    type: Date,
+    default: Date.now
+  }
 });
 menuItemsSchema.set("toJSON", {
   virtuals: true
@@ -46,6 +50,8 @@ const getOne = async (id) => {
 const create = async (body) => {
   try {
     const menuItem = await MenuItems.create(body);
+    const timestamp = Timestamp();
+    console.log(timestamp);
     return menuItem;
   } catch (error) {
     return error;
@@ -54,7 +60,11 @@ const create = async (body) => {
 
 const updateMenuItem = async (id, body) => {
   try {
-    const updatedMenuItem = await MenuItems.findByIdAndUpdate(id,{$set:body},{new:true}); // Esto asegura que devuelva el documento actualizado);
+    const updatedMenuItem = await MenuItems.findByIdAndUpdate(
+      id,
+      { $set: body },
+      { new: true }
+    ); // Esto asegura que devuelva el documento actualizado);
     return updatedMenuItem;
   } catch (error) {
     return error;
@@ -62,7 +72,7 @@ const updateMenuItem = async (id, body) => {
 };
 
 const deleteMenuItem = async (id) => {
-  try {   
+  try {
     const ItemDeleted = await MenuItems.findByIdAndDelete(id);
     return ItemDeleted;
   } catch (error) {
@@ -79,4 +89,12 @@ const serchByDescription = async (query) => {
   }
 };
 
-module.exports = { getAll, getOne, create, updateMenuItem, deleteMenuItem, serchByDescription, MenuItems };
+module.exports = {
+  getAll,
+  getOne,
+  create,
+  updateMenuItem,
+  deleteMenuItem,
+  serchByDescription,
+  MenuItems
+};

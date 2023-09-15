@@ -82,15 +82,10 @@ const getByStatus = async (status) => {
   return orders;
 };
 
-const getByTotalSales = async (items) => {
-  const orders = await Order.find({ items }).populate("items");
-  return orders;
-};
-
-
-
-
-
+// const getByTotalSales = async (status, items) => {
+//   const orders = await Order.find({ status, items }).populate("items");
+//   return orders;
+// };
 
 module.exports = {
   getAll,
@@ -99,6 +94,6 @@ module.exports = {
   update,
   remove,
   getByStatus,
-  getByTotalSales,
+  // getByTotalSales,
   Order
 };
