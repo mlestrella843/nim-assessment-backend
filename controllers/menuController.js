@@ -46,7 +46,8 @@ const delete_ = async (req, res) => {
     const item = await MenuItems.deleteMenuItem(id);
     console.log("This is the Item deleted:", item);
     console.log("Item was deleted!", id);
-    return id;
+    res.send(id);
+   // return id;
   } 
   catch (error) {
     console.log(error);
@@ -54,4 +55,14 @@ const delete_ = async (req, res) => {
   }
 };
 
-module.exports = { getAll, getOne, create, updated, delete_ };
+const search_ = async (req, res) => {
+  try {
+       const itemByQuery = await MenuItems.serchByDescription(req.query.name);
+       console.log("YA ESTA FUNCIONANDO!!!!!", itemByQuery);
+       res.send(itemByQuery);
+    }  catch (error) {
+       res.status(500).json({ error: "Error al buscar productos" });
+    }
+};
+
+module.exports = { getAll, getOne, create, updated, delete_, search_ };

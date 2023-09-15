@@ -70,5 +70,13 @@ const deleteMenuItem = async (id) => {
   }
 };
 
+const serchByDescription = async (query) => {
+  try {
+    const menuItem = await MenuItems.find(query);
+    return menuItem;
+  } catch (error) {
+    return error;
+  }
+};
 
-module.exports = { getAll, getOne, create, updateMenuItem, deleteMenuItem,  MenuItems };
+module.exports = { getAll, getOne, create, updateMenuItem, deleteMenuItem, serchByDescription, MenuItems };

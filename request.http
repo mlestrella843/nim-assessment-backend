@@ -2,8 +2,17 @@
 GET http://localhost:3001/api/orders HTTP/1.1
 
 ###
-
 GET http://localhost:3001/api/menu HTTP/1.1
+
+###
+GET http://localhost:3001/test HTTP/1.1
+
+###
+GET http://localhost:3001/test?name=Lasagna&price=23 HTTP/1.1
+
+###
+GET http://localhost:3001/api/menu/search?name=Pizza
+
 
 ###
 PUT http://localhost:3001/api/menu/6500ea9c27cee0ddf2ba63fd HTTP/1.1
