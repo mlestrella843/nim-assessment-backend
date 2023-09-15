@@ -1,3 +1,4 @@
+const { Timestamp } = require("mongodb");
 const mongoose = require("../db.js");
 
 const menuItemsSchema = new mongoose.Schema({
@@ -16,7 +17,7 @@ const menuItemsSchema = new mongoose.Schema({
   },
   imageUrl: {
     type: String
-  }
+  },
 });
 menuItemsSchema.set("toJSON", {
   virtuals: true
@@ -51,4 +52,23 @@ const create = async (body) => {
   }
 };
 
-module.exports = { getAll, getOne, create, MenuItems };
+const updateMenuItem = async (id, body) => {
+  try {
+    const updatedMenuItem = await MenuItems.findByIdAndUpdate(id,{$set:body},{new:true}); // Esto asegura que devuelva el documento actualizado);
+    return updatedMenuItem;
+  } catch (error) {
+    return error;
+  }
+};
+
+const deleteMenuItem = async (id) => {
+  try {   
+    const ItemDeleted = await MenuItems.findByIdAndDelete(id);
+    return ItemDeleted;
+  } catch (error) {
+    return error;
+  }
+};
+
+
+module.exports = { getAll, getOne, create, updateMenuItem, deleteMenuItem,  MenuItems };

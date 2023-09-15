@@ -27,4 +27,31 @@ const create = async (req, res) => {
   }
 };
 
-module.exports = { getAll, getOne, create };
+const updated = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const body = req.body;
+    const menu = await MenuItems.updateMenuItem(id, body); 
+    res.send(menu);
+    //console.log("This is the new menu:", menu);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send(error);
+  }
+};
+
+const delete_ = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const item = await MenuItems.deleteMenuItem(id);
+    console.log("This is the Item deleted:", item);
+    console.log("Item was deleted!", id);
+    return id;
+  } 
+  catch (error) {
+    console.log(error);
+    res.status(500).send(error);
+  }
+};
+
+module.exports = { getAll, getOne, create, updated, delete_ };
