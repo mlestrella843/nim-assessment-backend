@@ -54,12 +54,12 @@ const deleteItem = async (req, res) => {
 };
 
 const searchItem = async (req, res) => {
+  const { q } = req.query;
   try {
-    const itemByQuery = await MenuItems.serchByDescription(req.query.name);
-    console.log("Not working yet!", itemByQuery);
+    const itemByQuery = await MenuItems.searchByDescription(q);
     res.send(itemByQuery);
   } catch (error) {
-    res.status(500).json({ error: "Error al buscar productos" });
+    res.status(500).json({ error: "Error searching" });
   }
 };
 
