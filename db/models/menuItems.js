@@ -80,21 +80,23 @@ const deleteMenuItem = async (id) => {
   }
 };
 
-const serchByDescription = async (query) => {
+const searchByDescription = async (query) => {
   try {
-    const menuItem = await MenuItems.find(query);
+    const regex = new RegExp(query, "i");
+    const menuItem = await MenuItems.find({
+      $or: [{ name: { $regex: regex } }, { description: { $regex: regex } }]
+    });
     return menuItem;
   } catch (error) {
     return error;
   }
 };
-
 module.exports = {
   getAll,
   getOne,
   create,
   updateMenuItem,
   deleteMenuItem,
-  serchByDescription,
+  searchByDescription,
   MenuItems
 };
